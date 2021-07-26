@@ -4,10 +4,10 @@ const typeDefs = gql`
   # Central focus of application. These are cases for users to post and solve.
   type Mystery {
     id: ID!
+    title: String!
     description: String!
     clues: [String!]!
-    client: String!
-    comments: [String!]!
+    user: String!
     solved: Boolean!
   }
 
@@ -23,7 +23,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    newMystery(description: String!, clues: [String!]!): Mystery!
+    newMystery(title: String!, description: String!, clues: [String!]!): Mystery!
     removeMystery(id: ID!):Mystery!
     signUp(username: String!, password: String!):String!
     signIn(username: String!, password: String!):String!

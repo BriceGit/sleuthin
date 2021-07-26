@@ -1,40 +1,22 @@
-const {Users, Mysteries} = require('./database');
-
-const Mongoose = require('mongoose');
+const {Users, Mysteries} = require('./models');
 
 const {Schema, ObjectId} = require('mongoose');
 
 const {AuthenticationError, ValidationError} = require('apollo-server-express');
+
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 
-
-class Mystery{
-  constructor(description, clues, client) {
-    this.description = description;
-    this.clues = clues;
-    this.client = client;
-    this.comment = [];
-    this.solved = false;
-  }
-}
-
-class User {
-  constructor(username, password) {
-    this.username = username;
-    this.password = password;
-  }
-}
-
 const resolvers = {
   Query: {
-
+    //return all mysteries
     mysteries: async () => {
       return await Mysteries.find({});
     },
 
+    //return a specifc mystery by a specific id
     mystery: async (parent, args) => {
-      let mystery = await Mysteries.findById(Mongoose.Types.ObjectId(args.id));
+      let mystery = await Mysteries.findById(args.id);
       return mystery;
     }
   },
@@ -44,8 +26,6 @@ const resolvers = {
     //mutation to push a new mystery to the database
     newMystery: async (parent, args, {user}) => {
       try {
-
-        console.log(user);
         //throw error if not logged in
         if (!user) {
           throw new AuthenticationError("not logged in");
@@ -53,14 +33,13 @@ const resolvers = {
 
         //if previous check passes, username is gauranteed to exist in database
         //so no need for a follow up check to see if username exists
-        let username = await Users.findById(user)
-
+        let username = user.username;
 
         //create a mystery object
-        const newMystery = new Mystery(args.description, args.clues, username.username);
+        const newMystery = new Mystery({title: args.title, description: args.description, clues: args.clues, username, solved: false});
 
-        //push object to mysteries collection
-        return await Mysteries.create(newMystery);
+        //push mystery to Mysteries collection
+        return await newMystery.save();
       }
       //rethrow error
       catch (e) {
@@ -71,25 +50,23 @@ const resolvers = {
     //mutation to remove a mystery from the database
     removeMystery: async (parent, args, {user}) => {
       try {
-
         // throw error if client is not logged in
         if (!user) {
           throw new AuthenticationError("Not Logged In");
         }
 
         // query database for target Mystery
-        const targetMystery = await Mysteries.findById(Mongoose.Types.ObjectId(args.id));
+        const targetMystery = await Mysteries.findById(args.id);
 
         // if mystery does not exist throw an error
         if (!targetMystery) {
           throw new ValidationError("Mystery does not exist")
         }
 
-
-        let username = await Users.findById(user);
+        let username = await user.username;
 
         // if the client is not the creator of the mystery throw an error
-        if (username.username !== targetMystery.client) {
+        if (username.username !== targetMystery.user) {
           throw new AuthenticationError("Can't delete Mystery that you did not create")
         }
 
@@ -108,7 +85,7 @@ const resolvers = {
         //salt and hash user inputted password
         const hash = await bcrypt.hash(args.password, 10);
         //push new user account to users collections
-        const user = await Users.create(new User(args.username, hash));
+        const user = await Users.create({username: args.username, password: hash});
         //send an encryted token containing the users id
         return await jwt.sign({userid: user._id}, process.env.JWT_KEY);
       }
