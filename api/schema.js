@@ -42,7 +42,7 @@ const typeDefs = gql`
     signIn(username: String! password: String!): String!
     postCase(input: CaseInput!): Case!
     deleteCase (caseid: String!): Boolean!
-    updateCaseDescription(caseid: String!):
+    updateCaseDescription(caseid: String!): Case!
     toggleWorkOnCase(caseid: String!): [String!]!
     postComment(caseid: String!, text: String!): Comment!
   }

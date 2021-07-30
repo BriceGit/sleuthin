@@ -4,7 +4,7 @@
 
 let mongoose = require('mongoose');
 
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError, ForbiddenError} = require('apollo-server-express');
 
 //Mongoose collections
 const {User, Case, Clue, Comment} = require('./models');
@@ -58,6 +58,15 @@ const postCase = async (inputCase, token) => {
   return await Case.create(newCase);
 };
 
+
+const deleteCase = async (parent, args, token) => {
+  let user = authenticateToken(token);
+
+  let matchedCase = await Case.findById({_id: args.caseid});
+
+  if (!matchedCase) return
+};
+
 const toggleWorkOnCase = async (caseid, token) => {
   let user = await authenticateToken(token);
 
@@ -73,10 +82,6 @@ const toggleWorkOnCase = async (caseid, token) => {
   await User.updateOne({_id: user._id}, { $set: {casesWorkingOn: user.casesWorkingOn}});
 
   return user.casesWorkingOn;
-};
-
-const deleteCase = async (parent, args, token) => {
-
 };
 
 const setCaseSolved = async (parent, args, token) => {

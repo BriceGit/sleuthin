@@ -45,7 +45,6 @@ const resolvers = {
     },
     signIn: async (parent, args) => {
       return await signIn(args.username, args.password);
-
     },
     postCase: async (parent, args, context) => {
       return await postCase(args.input, context.token);
