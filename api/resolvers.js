@@ -1,132 +1,62 @@
-const {Users, Mysteries} = require('./models');
+const {User, Case, Clue, Comment} = require('./models');
 
-const {Schema, ObjectId} = require('mongoose');
+const {signIn, postCase, toggleWorkOnCase} = require('./bll');
 
-const {AuthenticationError, ValidationError} = require('apollo-server-express');
 
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 
 const resolvers = {
   Query: {
-    //return all mysteries
-    mysteries: async () => {
-      return await Mysteries.find({});
+    getAllCases: async () => {
+      return await Case.find({});
     },
 
-    //return a specifc mystery by a specific id
-    mystery: async (parent, args) => {
-      let mystery = await Mysteries.findById(args.id);
-      return mystery;
+    getUser: async (parent, args) => {
+      return await User.find({_id: args.userid}, {password: 0});
+    },
+
+    getCase: async (parent,args) => {
+      return await Case.findById(args.caseid);
     }
   },
 
   Mutation: {
-
-    //mutation to push a new mystery to the database
-    newMystery: async (parent, args, {user}) => {
-      try {
-        //throw error if not logged in
-        if (!user) {
-          throw new AuthenticationError("not logged in");
-        }
-
-        //if previous check passes, username is gauranteed to exist in database
-        //so no need for a follow up check to see if username exists
-        let username = user.username;
-
-        //create a mystery object
-        const newMystery = new Mystery({title: args.title, description: args.description, clues: args.clues, username, solved: false});
-
-        //push mystery to Mysteries collection
-        return await newMystery.save();
-      }
-      //rethrow error
-      catch (e) {
-        throw e;
-      }
-    },
-
-    //mutation to remove a mystery from the database
-    removeMystery: async (parent, args, {user}) => {
-      try {
-        // throw error if client is not logged in
-        if (!user) {
-          throw new AuthenticationError("Not Logged In");
-        }
-
-        // query database for target Mystery
-        const targetMystery = await Mysteries.findById(args.id);
-
-        // if mystery does not exist throw an error
-        if (!targetMystery) {
-          throw new ValidationError("Mystery does not exist")
-        }
-
-        let username = await user.username;
-
-        // if the client is not the creator of the mystery throw an error
-        if (username.username !== targetMystery.user) {
-          throw new AuthenticationError("Can't delete Mystery that you did not create")
-        }
-
-        //return mystery after it has been deleted
-        return await Mysteries.findByIdAndDelete(Mongoose.Types.ObjectId(args.id));
-      }
-      // rethrow error
-      catch (e){
-        throw e;
-      }
-    },
-
-    //mutation to add a new user to the databse and give them a token
     signUp: async (parent, args) => {
-      try {
-        //salt and hash user inputted password
-        const hash = await bcrypt.hash(args.password, 10);
-        //push new user account to users collections
-        const user = await Users.create({username: args.username, password: hash});
-        //send an encryted token containing the users id
-        return await jwt.sign({userid: user._id}, process.env.JWT_KEY);
+      //hash and salt the entered password
+      let hash = await bcrypt.hash(args.password, 10);
+
+      //create user object
+      const newUser = {
+        username: args.username,
+        password: hash,
+        openCases: [],
+        casesWorkingOn: [],
+        casesHelpedSolve: []
       }
-      catch (e) {
-        //rethrow error
-        throw e;
-      }
+
+      //persist user object to database and return the created mongoose object
+      let createdUser = await User.create(newUser);
+
+      //remove password field from the returned user
+      delete newUser.password;
+
+      return jwt.sign({userid: createdUser._id}, 'secret');
     },
-
-    //mutation to validate a use and give them a token
     signIn: async (parent, args) => {
+      return await signIn(args.username, args.password);
 
-      try {
-        // query database to see if the user exists in the database
-        var user = await Users.findOne({username: args.username});
+    },
+    postCase: async (parent, args, context) => {
+      return await postCase(args.input, context.token);
+    },
+    deleteCase: async (parent, args, context) => {
 
-        //if user does not exist throw an error
-        if (!user) throw new AuthenticationError("Username or password does not match")
-      }
-      // rethrow error
-      catch (e) {
-        throw e;
-      }
-
-      try {
-        //check if password is correct for user
-        let result = await bcrypt.compare(args.password, user.password);
-
-        //if it is, send an encrypted userid
-        if (result) {
-          return jwt.sign({userid: user._id}, process.env.JWT_KEY)
-        }
-        //otherwise throw an error
-        else {
-          throw new AuthenticationError("Username or password does not match")
-        }
-      }
-      //rethrow error
-      catch (e) {
-        throw e;
-      }
+    },
+    toggleWorkOnCase: async (parent, args, context) => {
+      return await toggleWorkOnCase(args.caseid, context.token);
+    },
+    postComment: async (parent, args, context) => {
 
     }
   }

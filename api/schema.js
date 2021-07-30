@@ -1,34 +1,51 @@
 const {gql} = require('apollo-server-express');
 
 const typeDefs = gql`
-  # Central focus of application. These are cases for users to post and solve.
-  type Mystery {
-    id: ID!
-    title: String!
-    description: String!
-    clues: [String!]!
-    user: String!
-    solved: Boolean!
-  }
-
   type User {
     id: ID!
     username: String!
-    password: String!
+    openCases: [Case!]!
+    casesWorkingOn: [Case!]!
+    casesHelpedSolve: [Case!]!
+  }
+
+  type Case {
+    id: ID!
+    client: User!
+    title: String!
+    description: String!
+    clues: [String!]!
+    solved: Boolean!
+    comments: [Comment!]!
+  }
+
+  input CaseInput {
+    title: String!
+    description: String!
+    clues: [String!]!
+  }
+
+  type Comment {
+    id: ID!
+    user: User!
+    text: String!
   }
 
   type Query {
-    mysteries: [Mystery]!
-    mystery (id: ID!): Mystery
+    getAllCases: [Case!]!
+    getUser(userid: String!): User
+    getCase(Caseid: String!): Case
   }
 
   type Mutation {
-    newMystery(title: String!, description: String!, clues: [String!]!): Mystery!
-    removeMystery(id: ID!):Mystery!
-    signUp(username: String!, password: String!):String!
-    signIn(username: String!, password: String!):String!
+    signUp(username: String! password: String!): String!
+    signIn(username: String! password: String!): String!
+    postCase(input: CaseInput!): Case!
+    deleteCase (caseid: String!): Boolean!
+    updateCaseDescription(caseid: String!):
+    toggleWorkOnCase(caseid: String!): [String!]!
+    postComment(caseid: String!, text: String!): Comment!
   }
-
 `
 
 module.exports = typeDefs;
