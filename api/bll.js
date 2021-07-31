@@ -17,7 +17,8 @@ const authenticateToken = async(token) => {
   if(!token) throw new AuthenticationError("not signed in")
 
   let userIdObject = await jwt.verify(token, 'secret');
-  let returnedUser  = await User.findById(userIdObject.userId);
+
+  let returnedUser  = await User.findById(userIdObject.userid);
 
   if (!returnedUser) throw new AuthenticationError("invalid identity");
 
@@ -39,7 +40,7 @@ const signIn = async (username, password) => {
   if (!passwordMatched) throw new AuthenticationError('incorrect username or password');
 
   //return token containing the encrypted user id;
-  return jwt.sign({userId: returnedUser._id}, 'secret');
+  return jwt.sign({userid: returnedUser._id}, 'secret');
 
 };
 
@@ -55,16 +56,41 @@ const postCase = async (inputCase, token) => {
     solved: false
   }
 
-  return await Case.create(newCase);
+  let persistedCase = await Case.create(newCase);
+
+  return Case.findById(persistedCase._id).select("-password").populate('client');
 };
 
 
-const deleteCase = async (parent, args, token) => {
-  let user = authenticateToken(token);
+const deleteCase = async (caseid, token) => {
+  let user = await authenticateToken(token);
 
-  let matchedCase = await Case.findById({_id: args.caseid});
+  let matchedCase = await Case.findById(caseid).populate('client');
 
-  if (!matchedCase) return
+  if (!matchedCase) throw new ForbiddenError("requested case does not exist");
+
+  console.log(matchedCase.client._id);
+  console.log(user._id);
+
+  if (String(matchedCase.client._id) != String(user._id)) {
+    throw new ForbiddenError("you do not have the priveledges to delete this case.");
+  }
+
+  return await Case.findByIdAndDelete(caseid).populate('client');
+};
+
+const updateCaseDescription = async (caseid, text, token) => {
+  let user = await authenticateToken(token);
+
+  let matchedCase = await Case.findById(caseid).populate('client');
+
+  if (!matchedCase) throw new ForbiddenError("requested case does not exist");
+
+  if (String(matchedCase.client._id) != String(user._id)) {
+    throw new ForbiddenError("you do not have the priveledges to edit this case.");
+  }
+
+  return await Case.findByIdAndUpdate(caseid, {description: text}).populate('client');
 };
 
 const toggleWorkOnCase = async (caseid, token) => {
@@ -84,9 +110,7 @@ const toggleWorkOnCase = async (caseid, token) => {
   return user.casesWorkingOn;
 };
 
-const setCaseSolved = async (parent, args, token) => {
 
-};
 
 const postComment = async (parent, args, token) => {
 
@@ -97,3 +121,5 @@ const postComment = async (parent, args, token) => {
 exports.signIn = signIn;
 exports.postCase = postCase;
 exports.toggleWorkOnCase = toggleWorkOnCase;
+exports.deleteCase = deleteCase;
+exports.updateCaseDescription = updateCaseDescription;

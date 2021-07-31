@@ -33,16 +33,17 @@ const typeDefs = gql`
 
   type Query {
     getAllCases: [Case!]!
+    getAllUsers: [User!]!
     getUser(userid: String!): User
-    getCase(Caseid: String!): Case
+    getCase(caseid: String!): Case
   }
 
   type Mutation {
     signUp(username: String! password: String!): String!
     signIn(username: String! password: String!): String!
     postCase(input: CaseInput!): Case!
-    deleteCase (caseid: String!): Boolean!
-    updateCaseDescription(caseid: String!): Case!
+    deleteCase (caseid: String!): Case!
+    updateCaseDescription(caseid: String! text: String!): Case!
     toggleWorkOnCase(caseid: String!): [String!]!
     postComment(caseid: String!, text: String!): Comment!
   }
