@@ -9,6 +9,12 @@ const typeDefs = gql`
     casesHelpedSolve: [Case!]!
   }
 
+  type PageResult {
+    cases: [Case!]!
+    hasNextPage: Boolean!
+    cursor: ID!
+  }
+
   type Case {
     id: ID!
     client: User!
@@ -36,6 +42,7 @@ const typeDefs = gql`
     getAllUsers: [User!]!
     getUser(userid: String!): User
     getCase(caseid: String!): Case
+    getPage(cursor: ID!): PageResult!
   }
 
   type Mutation {

@@ -29,11 +29,6 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
 
-  comments: {
-    type: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
-    required: true
-  }
-
 })
 
 const CaseSchema = new mongoose.Schema({
@@ -62,7 +57,12 @@ const CaseSchema = new mongoose.Schema({
   solved: {
     type: Boolean,
     required: true
-  }
+  },
+
+  comments: {
+    type: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
+    required: true
+  },
 
 
 })

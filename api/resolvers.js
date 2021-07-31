@@ -1,6 +1,6 @@
 const {User, Case, Clue, Comment} = require('./models');
 
-const {signIn, postCase, toggleWorkOnCase, deleteCase, updateCaseDescription} = require('./bll');
+const {signIn, postCase, toggleWorkOnCase, deleteCase, updateCaseDescription, postComment} = require('./bll');
 
 
 const bcrypt = require('bcrypt');
@@ -9,7 +9,18 @@ const jwt = require("jsonwebtoken");
 const resolvers = {
   Query: {
     getAllCases: async () => {
-      return await Case.find({}).populate('client');
+      allCases = await Case.find({}).populate('client')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'user',
+          model: 'User'
+        }
+      });
+
+      console.log(allCases);
+
+      return allCases;
     },
     getAllUsers: async () => {
       return await User.find({});
@@ -60,7 +71,7 @@ const resolvers = {
       return await toggleWorkOnCase(args.caseid, context.token);
     },
     postComment: async (parent, args, context) => {
-
+      return await postComment(args.caseid, args.text, context.token);
     }
   }
 }

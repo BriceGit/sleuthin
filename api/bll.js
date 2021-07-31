@@ -7,7 +7,7 @@ let mongoose = require('mongoose');
 const { AuthenticationError, ForbiddenError} = require('apollo-server-express');
 
 //Mongoose collections
-const {User, Case, Clue, Comment} = require('./models');
+const {User, Case, Comment} = require('./models');
 
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
@@ -53,12 +53,13 @@ const postCase = async (inputCase, token) => {
     title: inputCase.title,
     description: inputCase.description,
     clues: inputCase.clues,
-    solved: false
+    solved: false,
+    commments: []
   }
 
   let persistedCase = await Case.create(newCase);
 
-  return Case.findById(persistedCase._id).select("-password").populate('client');
+  return Case.findById(persistedCase._id).select("-password").populate('client').populate('comments');
 };
 
 
@@ -93,6 +94,28 @@ const updateCaseDescription = async (caseid, text, token) => {
   return await Case.findByIdAndUpdate(caseid, {description: text}).populate('client');
 };
 
+const postComment = async (caseid, text, token) => {
+
+  let user = await authenticateToken(token);
+
+  let matchedCase = await Case.findById(caseid);
+
+  if (!matchedCase) throw new ForbiddenError("requested case does not exist");
+
+  let newComment = {
+    user: mongoose.Types.ObjectId(user._id),
+    text: text
+  };
+
+  newComment = await Comment.create(newComment);
+
+  matchedCase.comments.push(newComment._id);
+
+  await Case.findByIdAndUpdate(caseid, {comments: matchedCase.comments});
+
+  return await Comment.findById(newComment._id).populate('user');
+};
+
 const toggleWorkOnCase = async (caseid, token) => {
   let user = await authenticateToken(token);
 
@@ -112,14 +135,9 @@ const toggleWorkOnCase = async (caseid, token) => {
 
 
 
-const postComment = async (parent, args, token) => {
-
-};
-
-
-
 exports.signIn = signIn;
 exports.postCase = postCase;
 exports.toggleWorkOnCase = toggleWorkOnCase;
 exports.deleteCase = deleteCase;
 exports.updateCaseDescription = updateCaseDescription;
+exports.postComment = postComment;
