@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-app.use(cors());
 
 require('dotenv').config();
 
@@ -25,6 +24,8 @@ const server = new ApolloServer(
   {
     //graphql schema
     typeDefs,
+
+    cors: cors,
     //graphql resolvers
     resolvers,
 
