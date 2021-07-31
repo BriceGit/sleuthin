@@ -2,6 +2,7 @@ const {User, Case, Clue, Comment} = require('./models');
 
 const {signIn, postCase, toggleWorkOnCase, deleteCase, updateCaseDescription, postComment} = require('./bll');
 
+require('dotenv').config();
 
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
@@ -53,7 +54,7 @@ const resolvers = {
       //remove password field from the returned user
       delete newUser.password;
 
-      return jwt.sign({userid: createdUser._id}, 'secret');
+      return jwt.sign({userid: createdUser._id}, process.env.JWT);
     },
     signIn: async (parent, args) => {
       return await signIn(args.username, args.password);
