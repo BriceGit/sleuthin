@@ -40,7 +40,7 @@ const signIn = async (username, password) => {
   if (!passwordMatched) throw new AuthenticationError('incorrect username or password');
 
   //return token containing the encrypted user id;
-  return jwt.sign({userid: returnedUser._id}, 'secret');
+  return jwt.sign({userid: returnedUser._id}, process.env.JWT_KEY);
 
 };
 

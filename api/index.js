@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const helmet = require('helmet');
 
 require('dotenv').config();
 
@@ -14,18 +15,17 @@ const initDB = require('./database');
 
 const {Users} = require('./models');
 
-
-
 const {ApolloServer} = require('apollo-server-express')
 
-let port = process.env.PORT || 4042;    //general purpose catch statement. Will add more specific error handling at a later date
+let port = process.env.PORT || 4041;    //general purpose catch statement. Will add more specific error handling at a later date
+
+// app.use(helmet());
+app.use(cors());
 
 const server = new ApolloServer(
   {
     //graphql schema
     typeDefs,
-
-    cors: cors,
     //graphql resolvers
     resolvers,
 

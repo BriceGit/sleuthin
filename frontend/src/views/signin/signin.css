@@ -1,0 +1,9 @@
+form label {
+  float: left;
+  width: 100px;
+}
+form input[type=submit] {
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=signin.css.map */

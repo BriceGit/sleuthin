@@ -54,7 +54,7 @@ const resolvers = {
       //remove password field from the returned user
       delete newUser.password;
 
-      return jwt.sign({userid: createdUser._id}, process.env.JWT);
+      return jwt.sign({userid: createdUser._id}, process.env.JWT_KEY);
     },
     signIn: async (parent, args) => {
       return await signIn(args.username, args.password);
