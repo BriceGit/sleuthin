@@ -10,6 +10,8 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  ApolloLink,
+  HttpLink
 } from "@apollo/client";
 
 import {
@@ -18,8 +20,26 @@ import {
   Route,
 } from "react-router-dom";
 
+
+
+const authLink = new ApolloLink((operation, forward) => {
+  operation.setContext(
+    {
+      headers:
+      {
+        authorization: window.sessionStorage.getItem('token')
+      }
+    });
+  return forward(operation);
+});
+
+const httpLink = new HttpLink({
+  uri:'http://localhost:4041/app'
+})
+
+
 const client = new ApolloClient({
-  uri: 'http://localhost:4041/app',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

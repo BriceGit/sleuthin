@@ -35,6 +35,9 @@ function SignInHelper(props) {
 
   signIn();
 
+  if (data) {
+    window.sessionStorage.setItem("token", data.signIn);
+  }
 
   return (
     <div>
