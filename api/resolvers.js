@@ -19,8 +19,6 @@ const resolvers = {
         }
       });
 
-      console.log(allCases);
-
       return allCases;
     },
     getAllUsers: async () => {
@@ -30,7 +28,7 @@ const resolvers = {
       return await User.findOne({_id: args.userid}, {password: 0});
     },
     getCase: async (parent,args) => {
-      return await Case.findById(args.caseid);
+      return await Case.findById(args.caseid).populate('client');
     }
   },
 

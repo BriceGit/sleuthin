@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const db = mongoose.connection;
-const jwt = require("jsonwebtoken");
 require('dotenv').config();
 
 function initDB() {

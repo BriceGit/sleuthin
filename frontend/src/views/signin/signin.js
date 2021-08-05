@@ -3,11 +3,19 @@ import './signin.css';
 
 import {gql, useMutation} from '@apollo/client';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
+
 
 function SignInHelper(props) {
 
   const SIGN_IN = gql`
-    mutation Token($username: String!, $password: String!) {
+    mutation signin($username: String!, $password: String!) {
       signIn(username: $username, password: $password)
     }
   `;
@@ -30,9 +38,9 @@ function SignInHelper(props) {
 
   return (
     <div>
-      {error && <p> Error {error.message} </p>}
+      {error && <p> Error: {error.message} </p>}
       {loading && <p> Loading... </p>}
-      {data && <p> Data: {data.signIn} </p>}
+      {data && <Redirect to= "/homepage"/>}
     </div>
   )
 
@@ -47,24 +55,26 @@ export default function SignInForm () {
 
 
     return (
-        <div id = "signin-box" >
-          {startSignInQuery ||
+      <div id = "signin-box" >
+        {startSignInQuery ||
+          <fieldset>
+            <legend> Sign In </legend>
             <form >
-            <label > Username < /label>
-            <input name = "username"type = "text"onChange = {e => setUsername(e.target.value)} />
-            <br / >
-            < label > Password < /label>
-            <input name = "password"type = "password" onChange = {e => setPassword(e.target.value)}/>
+              <label > Username < /label>
+              <input name = "username"type = "text"onChange = {e => setUsername(e.target.value)} />
+              <br / >
+              < label > Password < /label>
+              <input name = "password"type = "password" onChange = {e => setPassword(e.target.value)} />
 
-            <input type = "submit" onClick = {e =>  {e.preventDefault(); start(true)}} />
-            <br / >
-            <a href = ""> Sign Up < /a>
-            </form>
-          }
-          {startSignInQuery &&
-            <SignInHelper username = {username} password = {password} />
-          }
-
-        </ div>
+              <input type = "submit" onClick = {e =>  {e.preventDefault(); start(true)}} />
+              <br / >
+              <Link to = "/signup"> Sign Up < /Link>
+              </form>
+          </fieldset>
+        }
+        {startSignInQuery &&
+          <SignInHelper username = {username} password = {password} />
+        }
+      </ div>
     )
 }

@@ -16,7 +16,7 @@ const authenticateToken = async(token) => {
 
   if(!token) throw new AuthenticationError("not signed in")
 
-  let userIdObject = await jwt.verify(token, 'secret');
+  let userIdObject = await jwt.verify(token, process.env.JWT_KEY);
 
   let returnedUser  = await User.findById(userIdObject.userid);
 
