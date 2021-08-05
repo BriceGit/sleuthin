@@ -28,7 +28,14 @@ const resolvers = {
       return await User.findOne({_id: args.userid}, {password: 0});
     },
     getCase: async (parent,args) => {
-      return await Case.findById(args.caseid).populate('client');
+      return await Case.findById(args.caseid).populate('client')
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'user',
+          model: 'User'
+        }
+      });
     }
   },
 

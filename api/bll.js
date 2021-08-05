@@ -107,6 +107,7 @@ const postComment = async (caseid, text, token) => {
     text: text
   };
 
+
   newComment = await Comment.create(newComment);
 
   matchedCase.comments.push(newComment._id);
