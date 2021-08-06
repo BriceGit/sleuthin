@@ -32,7 +32,7 @@ function SignUpHelper(props) {
   signUp();
 
   if (data) {
-    window.sessionStorage.setItem("token", data.signIn);
+    window.sessionStorage.setItem("token", data.signUp);
   }
 
   return (

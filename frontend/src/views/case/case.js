@@ -22,6 +22,10 @@ function Comment (props) {
 
   const [post, {data, loading, error}] = useMutation(POST_COMMENT, {
     variables: {caseid: props.caseid, text: commentText},
+    refetchQueries: [
+      props.query,
+      "getCase"
+    ]
   });
 
 
