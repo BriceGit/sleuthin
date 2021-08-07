@@ -59,6 +59,10 @@ const postCase = async (inputCase, token) => {
 
   let persistedCase = await Case.create(newCase);
 
+  user.cases.push(persistedCase._id);
+
+  await User.create(user);
+
   return Case.findById(persistedCase._id).select("-password").populate('client').populate('comments');
 };
 

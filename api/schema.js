@@ -4,7 +4,7 @@ const typeDefs = gql`
   type User {
     id: ID!
     username: String!
-    openCases: [Case!]!
+    cases: [Case!]!
     casesWorkingOn: [Case!]!
     casesHelpedSolve: [Case!]!
   }

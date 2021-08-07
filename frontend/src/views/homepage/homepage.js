@@ -18,7 +18,9 @@ function Cases() {
     }
   `;
 
-  const {loading,error,data} = useQuery(GET_CASES);
+  const {loading,error,data} = useQuery(GET_CASES , {
+    fetchPolicy: "cache-and-network"
+  });
 
   if (error) return (<p> {error.message} </p>);
 
@@ -47,7 +49,7 @@ export default function HomePage() {
         Sleuthin—A mystery is afoot!
         <nav>
           <Link to = "/homepage"> Home </Link>
-          <Link to = "/profile:id"> Profile </Link>
+          <Link to = "/postcase"> Post a Case </Link>
         </nav>
       </header>
       <body>

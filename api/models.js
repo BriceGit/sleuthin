@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
 
-  openCases: {
+  cases: {
     type: [{type: Schema.Types.ObjectId, ref: 'Case'}],
     required: true
   },

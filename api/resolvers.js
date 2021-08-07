@@ -48,7 +48,7 @@ const resolvers = {
       const newUser = {
         username: args.username,
         password: hash,
-        openCases: [],
+        cases: [],
         casesWorkingOn: [],
         casesHelpedSolve: []
       }

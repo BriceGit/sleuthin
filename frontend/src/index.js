@@ -5,6 +5,7 @@ import SignIn from './views/signin/signin.js'
 import SignUp from './views/signup/signup.js'
 import HomePage from './views/homepage/homepage.js'
 import Case from './views/case/case.js'
+import CaseForm from './views/caseform/caseform.js'
 
 import {
   ApolloClient,
@@ -54,6 +55,7 @@ function App() {
         <Route path = "/signin"> <SignIn /> </Route>
         <Route path ="/homepage"> <HomePage /> </Route>
         <Route path ="/case/:caseid"> <Case /> </Route>
+        <Route path = "/postcase"> <CaseForm /> </Route>
       </Switch>
     </Router>
   )
