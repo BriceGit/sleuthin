@@ -77,22 +77,35 @@ function handleClueClick(e) {
   return (
     <div>
       <fieldset>
-        <legend> post a case </legend>
+        <legend>Post a Case</legend>
         <form>
-          <label> title </label>
-          <input type = "text" onChange = {(x) => setTitle(x.target.value)} />
+          <div id = "titleform">
+            <label>Title</label>
+            <input type = "text" onChange = {(x) => setTitle(x.target.value)} />
+          </div>
           <br />
-          <label> description </label>
-          <textarea onChange = {(x) => setDescription(x.target.value)} />
+          <div id = "description">
+            <label>Description</label>
+            <textarea onChange = {(x) => setDescription(x.target.value)} />
+          </div>
           <br />
-          <label> Clue: </label>
-          <textarea onChange = {(x) => setClueInput(x.target.value)} value = {clueInput}/>
-          <br />
-          <button onClick = {handleSubmitClue}> Add Clue </button>
-          <ol>
-            { clues.map( (element, idx) => <li key = {idx} index = {idx} id = "clue" onClick = {handleClueClick}> {element} </li>) }
-          </ol>
-          <input type = "submit" onClick = {handleSubmit}/>
+          <div id = "clueform">
+            <label>Clue</label>
+            <textarea onChange = {(x) => setClueInput(x.target.value)} value = {clueInput}/>
+            <button onClick = {handleSubmitClue}> Add Clue </button>
+          </div>
+          <hr />
+          <div id = "clues">
+            <div>
+              <p>Clues:</p>
+              <ol>
+                { clues.map( (element, idx) => <li key = {idx} index = {idx} id = "clue" onClick = {handleClueClick}> {element} </li>) }
+              </ol>
+            </div>
+          </div>
+          <div id= "submit">
+            <button onClick = {handleSubmit}>Submit Case </button>
+          </div>
         </form>
       </ fieldset>
       {data && <Redirect to = "/homepage" />}
