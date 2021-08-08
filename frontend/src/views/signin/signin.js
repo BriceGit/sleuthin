@@ -58,26 +58,32 @@ export default function SignInForm () {
 
 
     return (
-      <div id = "signin-box" >
-        {startSignInQuery ||
-          <fieldset>
-            <legend> Sign In </legend>
-            <form >
-              <label > Username < /label>
-              <input name = "username"type = "text"onChange = {e => setUsername(e.target.value)} />
-              <br / >
-              < label > Password < /label>
-              <input name = "password"type = "password" onChange = {e => setPassword(e.target.value)} />
-
-              <input type = "submit" onClick = {e =>  {e.preventDefault(); start(true)}} />
-              <br / >
-              <Link to = "/signup"> Sign Up < /Link>
+      <div>
+        <h1> Sleuthin </h1>
+        <div id = "signin-box" >
+          {startSignInQuery ||
+            <fieldset>
+              <legend> Sign In </legend>
+              <form>
+                <div id = "userform">
+                  <label > Username < /label>
+                  <input type = "text"onChange = {e => setUsername(e.target.value)} />
+                </div>
+                <br / >
+                <div id = "passform" >
+                  < label > Password < /label>
+                  <input type = "password" onChange = {e => setPassword(e.target.value)} />
+                  <input id = "submit" type = "submit" onClick = {e =>  {e.preventDefault(); start(true)}} />
+                </ div>
+                <br / >
+                <Link to = "/signup"> Sign Up < /Link>
               </form>
-          </fieldset>
-        }
-        {startSignInQuery &&
-          <SignInHelper username = {username} password = {password} />
-        }
-      </ div>
+            </fieldset>
+          }
+          {startSignInQuery &&
+            <SignInHelper username = {username} password = {password} />
+          }
+        </ div>
+      </div>
     )
 }

@@ -1,9 +1,64 @@
-form label {
-  float: left;
-  width: 100px;
-}
-form input[type=submit] {
-  margin-left: 10px;
+html {
+  height: 100%;
 }
 
-/*# sourceMappingURL=signin.css.map */
+body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body {
+  background: linear-gradient(#440a67, #ffe3fe);
+  background-size: cover;
+  font-family: monospace;
+}
+body h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  color: #ffe3fe;
+}
+body #signup-box fieldset {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  border-width: 5px;
+  border-style: none;
+  background-color: #b4aee8;
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+}
+body #signup-box fieldset legend {
+  font-size: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #ffe3fe;
+  border-radius: 80px;
+}
+body #signup-box fieldset label {
+  font-size: 20px;
+  margin-right: 25px;
+}
+body #signup-box fieldset form {
+  position: relative;
+}
+body #signup-box fieldset form input {
+  border: none;
+}
+body #signup-box fieldset form #userform {
+  margin-top: 20px;
+}
+body #signup-box fieldset form #passform {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+body #signup-box fieldset form #passform #submit {
+  margin-left: 20px;
+  background-color: #ffe3fe;
+}
+
+/*# sourceMappingURL=signup.css.map */

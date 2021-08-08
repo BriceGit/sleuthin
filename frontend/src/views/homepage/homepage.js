@@ -18,6 +18,7 @@ function Cases() {
     }
   `;
 
+
   const {loading,error,data} = useQuery(GET_CASES , {
     fetchPolicy: "cache-and-network"
   });
@@ -50,11 +51,12 @@ export default function HomePage() {
         <nav>
           <Link to = "/homepage"> Home </Link>
           <Link to = "/postcase"> Post a Case </Link>
+          <Link to = "/usercases"> My cases </Link>
         </nav>
       </header>
-      <body>
+      <div>
         <Cases />
-      </body>
+      </div>
 
     </div>
   )

@@ -1,6 +1,7 @@
 const {User, Case, Clue, Comment} = require('./models');
 
-const {signIn, postCase, toggleWorkOnCase, deleteCase, updateCaseDescription, postComment} = require('./bll');
+const {signIn, postCase, toggleWorkOnCase, deleteCase,
+   updateCase, postComment, getCurrentUser, markCaseAsSolved} = require('./bll');
 
 require('dotenv').config();
 
@@ -26,6 +27,11 @@ const resolvers = {
     },
     getUser: async (parent, args) => {
       return await User.findOne({_id: args.userid}, {password: 0});
+    },
+    getCurrentUser: async (parent, args, context) => {
+      let user = await getCurrentUser(context.token);
+      delete user["password"];
+      return user;
     },
     getCase: async (parent,args) => {
       return await Case.findById(args.caseid).populate('client')
@@ -70,14 +76,17 @@ const resolvers = {
     deleteCase: async (parent, args, context) => {
       return await deleteCase(args.caseid, context.token);
     },
-    updateCaseDescription: async (parent, args, context) => {
-      return await updateCaseDescription(args.caseid, args.text, context.token);
+    updateCase: async (parent, args, context) => {
+      return await updateCase(args.caseid, args.input, context.token);
     },
     toggleWorkOnCase: async (parent, args, context) => {
       return await toggleWorkOnCase(args.caseid, context.token);
     },
     postComment: async (parent, args, context) => {
       return await postComment(args.caseid, args.text, context.token);
+    },
+    markCaseAsSolved: async (parent, args, context) => {
+      return await markCaseAsSolved(args.caseid, context.token);
     }
   }
 }

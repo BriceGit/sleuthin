@@ -18,7 +18,7 @@ const authenticateToken = async(token) => {
 
   let userIdObject = await jwt.verify(token, process.env.JWT_KEY);
 
-  let returnedUser  = await User.findById(userIdObject.userid);
+  let returnedUser  = await User.findById(userIdObject.userid).populate("cases");
 
   if (!returnedUser) throw new AuthenticationError("invalid identity");
 
@@ -66,6 +66,25 @@ const postCase = async (inputCase, token) => {
   return Case.findById(persistedCase._id).select("-password").populate('client').populate('comments');
 };
 
+const markCaseAsSolved = async (caseid, token) => {
+  let user = await authenticateToken(token);
+
+  let matchedCase = await Case.findById(caseid).populate('client');
+
+  // if (!matchedCase) throw new ForbiddenError("requested case does not exist");
+
+  console.log(matchedCase.client._id);
+  console.log(user._id);
+
+  if (String(matchedCase.client._id) != String(user._id)) {
+    throw new ForbiddenError("you do not have the priveledges to delete this case.");
+    return false;
+  }
+
+  await Case.findByIdAndUpdate(caseid, {solved: true});
+
+  return true;
+};
 
 const deleteCase = async (caseid, token) => {
   let user = await authenticateToken(token);
@@ -84,7 +103,7 @@ const deleteCase = async (caseid, token) => {
   return await Case.findByIdAndDelete(caseid).populate('client');
 };
 
-const updateCaseDescription = async (caseid, text, token) => {
+const updateCase = async (caseid, input, token) => {
   let user = await authenticateToken(token);
 
   let matchedCase = await Case.findById(caseid).populate('client');
@@ -95,7 +114,9 @@ const updateCaseDescription = async (caseid, text, token) => {
     throw new ForbiddenError("you do not have the priveledges to edit this case.");
   }
 
-  return await Case.findByIdAndUpdate(caseid, {description: text}).populate('client');
+  await Case.findByIdAndUpdate(caseid, {description: input.description, title: input.title, clues: input.clues}).populate('client');
+
+  return true;
 };
 
 const postComment = async (caseid, text, token) => {
@@ -138,11 +159,18 @@ const toggleWorkOnCase = async (caseid, token) => {
   return user.casesWorkingOn;
 };
 
+const getCurrentUser = async (token) => {
+  return await authenticateToken(token);
+
+}
+
 
 
 exports.signIn = signIn;
 exports.postCase = postCase;
 exports.toggleWorkOnCase = toggleWorkOnCase;
 exports.deleteCase = deleteCase;
-exports.updateCaseDescription = updateCaseDescription;
+exports.updateCase = updateCase;
 exports.postComment = postComment;
+exports.getCurrentUser = getCurrentUser;
+exports.markCaseAsSolved = markCaseAsSolved;

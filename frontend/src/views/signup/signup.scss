@@ -1,11 +1,75 @@
-form {
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
-  label {
-    float: left;
-    width: 100px;
+
+body {
+  background: linear-gradient(rgb(68, 10, 103),rgb(255, 227, 254)) ;
+  background-size: cover;
+  font-family: monospace;
+  h1 {
+     display: flex;
+     justify-content: center;
+     font-size: 50px;
+     color: #ffe3fe
+
   }
+  #signup-box {
+    fieldset {
+      width:80%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 25px;
+      border-width: 5px;
+      border-style: none;
+      background-color: rgb(180, 174, 232);
+      display: flex;
+      justify-content: center;
+      border-radius: 20px;
 
-  input[type="submit"] {
-    margin-left: 10px;
+      legend {
+        font-size: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        background: rgb(255, 227, 254);
+        border-radius: 80px;
+      }
+
+      label {
+        font-size: 20px;
+        margin-right: 25px;
+      }
+
+
+      form {
+        position: relative;
+
+        input {
+          border: none;
+        }
+
+        #userform {
+          margin-top: 20px;
+        }
+
+        #passform {
+          margin-top: 20px;
+
+          #submit {
+            margin-left: 20px;
+            background-color: rgb(255, 227, 254);
+          }
+
+          margin-bottom: 40px;
+        }
+
+      }
+    }
   }
 }

@@ -40,6 +40,7 @@ const typeDefs = gql`
   type Query {
     getAllCases: [Case!]!
     getAllUsers: [User!]!
+    getCurrentUser: User
     getUser(userid: String!): User
     getCase(caseid: String!): Case
     getPage(cursor: ID!): PageResult!
@@ -50,9 +51,10 @@ const typeDefs = gql`
     signIn(username: String! password: String!): String!
     postCase(input: CaseInput!): Case!
     deleteCase (caseid: String!): Case!
-    updateCaseDescription(caseid: String! text: String!): Case!
+    updateCase(caseid: String! input: CaseInput!): Boolean!
     toggleWorkOnCase(caseid: String!): [String!]!
     postComment(caseid: String!, text: String!): Comment!
+    markCaseAsSolved(caseid: String!): Boolean!
   }
 `
 

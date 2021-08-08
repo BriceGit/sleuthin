@@ -22,10 +22,7 @@ function Comment (props) {
 
   const [post, {data, loading, error}] = useMutation(POST_COMMENT, {
     variables: {caseid: props.caseid, text: commentText},
-    refetchQueries: [
-      props.query,
-      "getCase"
-    ]
+    refetchQueries: [ {query: props.query, variables: {caseid: props.caseid}}]
   });
 
 
@@ -82,7 +79,7 @@ function Case () {
       <p> Description: {data.getCase.description} </p>
       <p> Clues: </p>
       <ol>
-        {data.getCase.clues.map( x => <li key = {x.id}> {x} </li>)}
+        {data.getCase.clues.map( (x, idx) => <li key = {idx}> {x} </li>)}
       </ol>
       <p> Add to the discussion: </p>
       <Comment query = {GET_CASE} caseid = {data.getCase.id} />

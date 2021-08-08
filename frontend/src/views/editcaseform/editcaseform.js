@@ -1,0 +1,106 @@
+import React from 'react';
+
+import {useState} from 'react';
+
+import {gql, useMutation, useQuery} from '@apollo/client';
+
+import {Redirect, useParams} from 'react-router';
+
+import './editcaseform.css'
+
+
+const GET_CASE = gql`
+  query gc($caseid: String!) {
+    getCase(caseid: $caseid) {
+      title
+      description
+      clues
+    }
+  }`
+
+  const EDIT_CASE = gql`
+    mutation uc($input: CaseInput!, $caseid: String!) {
+      updateCase(input: $input, caseid: $caseid)
+    }
+  `;
+
+function GenericCaseForm(props) {
+
+  let [title, setTitle] = useState(props.title);
+  let [description, setDescription] = useState(props.description);
+  let [clues, setClues] = useState(props.clues);
+  let [clueInput, setClueInput] = useState("");
+
+  const [post, {data, loading, error}] = useMutation(EDIT_CASE, {
+    variables: {caseid: props.id, input: {title, description, clues}}
+  })
+
+  function handleSubmit(e) {
+      e.preventDefault();
+      post();
+
+    }
+
+  function handleSubmitClue(e) {
+    e.preventDefault();
+    setClues(clues.concat(clueInput));
+    setClueInput("");
+  }
+
+  function handleClueClick(e) {
+    let idx = e.target.getAttribute('index');
+
+    let newClues = clues.filter(function (element, index) {
+      return (index != idx);
+    })
+
+    setClues(newClues);
+  }
+
+  return (
+    <div>
+      <fieldset>
+        <legend> post a case </legend>
+        <form>
+          <label> title </label>
+          <input type = "text" onChange = {(x) => setTitle(x.target.value)} value = {title}/>
+          <br />
+          <label> description </label>
+          <textarea onChange = {(x) => setDescription(x.target.value)} value = {description}/>
+          <br />
+          <label> Clue: </label>
+          <textarea onChange = {(x) => setClueInput(x.target.value)} value = {clueInput}/>
+          <br />
+          <button onClick = {handleSubmitClue}> Add Clue </button>
+          <ol>
+            { clues.map( (element, idx) => <li key = {idx} index = {idx} id = "clue" onClick = {handleClueClick}> {element} </li>) }
+          </ol>
+          <input type = "submit" onClick = {handleSubmit}/>
+        </form>
+      </ fieldset>
+      {data && <Redirect to = "/homepage" />}
+    </div>
+  )
+}
+
+
+export default function EditCaseForm (props) {
+
+
+  let {caseid} = useParams();
+
+  const {loading, error, data} = useQuery(GET_CASE, {variables: {caseid} });
+
+  return (
+    <div>
+      {data && <GenericCaseForm id = {caseid} title = {data.getCase.title} description = {data.getCase.description} clues = {data.getCase.clues} /> }
+      {loading && <p> loading... </p>}
+      {error && <p> {error.message} </p>}
+    </div>
+  )
+
+
+
+
+
+}
