@@ -76,6 +76,7 @@ function App() {
         <Route path = "/postcase"> <CaseForm /> </Route>
         <Route path = "/usercases"> <UserCases /> </Route>
         <Route path = "/editcase/:caseid"> <EditCaseForm /> </Route>
+        <Route path = "/"> <SignIn /> </Route>
       </Switch>
     </Router>
   )

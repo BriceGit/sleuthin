@@ -88,6 +88,7 @@ function Case () {
         <p className = {styles.attd}> Add to the discussion: </p>
         <Comment query = {GET_CASE} caseid = {data.getCase.id} />
         < hr />
+
         <ul className = {styles.commentList}>
           {data.getCase.comments.map( x => <li key = {x.id}> <p> {x.user.username}: {x.text} </p> </li>)}
         </ul>

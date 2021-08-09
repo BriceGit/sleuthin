@@ -32,7 +32,10 @@ function GenericCaseForm(props) {
   let [clueInput, setClueInput] = useState("");
 
   const [post, {data, loading, error}] = useMutation(EDIT_CASE, {
-    variables: {caseid: props.id, input: {title, description, clues}}
+    variables: {caseid: props.id, input: {title, description, clues}},
+    onError: () => {
+
+    }
   })
 
   function handleSubmit(e) {
@@ -108,7 +111,7 @@ export default function EditCaseForm (props) {
     <div>
       {data && <GenericCaseForm id = {caseid} title = {data.getCase.title} description = {data.getCase.description} clues = {data.getCase.clues} /> }
       {loading && <p> loading... </p>}
-      {error && <p> {error.message} </p>}
+      {error && <p> Error: Incorrect input to edit case. Referesh the page and make sure the title and and description are included </p>}
     </div>
   )
 }

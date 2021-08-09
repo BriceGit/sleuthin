@@ -44,8 +44,12 @@ export default function CaseForm (props) {
         description,
         clues
       }
+    },
+    onError: () => {
+
     }
   });
+
 
 
 
@@ -106,6 +110,7 @@ function handleClueClick(e) {
         </form>
       </ fieldset>
       {data && <Redirect to = "/homepage" />}
+      {error && <p>  Error: Incorrect input to case. Referesh the page and make sure the title and and description are included </p>}
     </div>
   )
 }
