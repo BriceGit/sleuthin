@@ -2,71 +2,52 @@
 	margin-top:  40px;
 	margin-left: auto;
 	margin-right: auto;
-	width: 80%;
-	height:auto;
 	background-color: rgb(255, 227, 254);
+	width: 80%;
   border-radius: 30px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 
 	.title {
-		display: flex;
 		font-size: 70px;
-		justify-content: center;
 		margin-bottom: 20px;
 	}
 	.user {
-		display: flex;
-		justify-content: center;
 		margin-bottom: 20px;
-
 	}
 	.description {
-		display: flex;
-		justify-content: center;
 		margin-bottom: 20px;
 	}
 
 	.cluestitle {
-		display: flex;
-		justify-content: center;
 		margin-bottom: 20px
 	}
 
 	.clues {
-		display: flex;
-		justify-content: center;
 		margin-bottom: 20px;
+		list-style: decimal;
 	}
 
 	.commentList {
-		display: flex;
-		justify-content: center;
 		margin-bottom: 20px;
+		list-style: disc;
 	}
 
 	.attd {
-		display: flex;
-		justify-content: center;
 	}
 
 	.comment {
-		display: flex;
-		justify-content: center;
 		margin-bottom: 20px;
 	}
 
 	.solved {
-		display: flex;
 		color: green;
-		justify-content: center;
 		margin-bottom: 20px;
 	}
 
 	.unsolved {
-		display: flex;
 		color: red;
-		justify-content: center;
 		margin-bottom: 20px;
 	}
 }

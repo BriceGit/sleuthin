@@ -78,12 +78,19 @@ function Case () {
   if (data) return (
     <div className = {styles.container}>
         <h1 className = {styles.title}> {data.getCase.title} </h1>
+        <br />
         <h2 className = {styles.user} >posted by: {data.getCase.client.username} </h2>
+        <br />
         <p className = {data.solved? styles.solved : styles.unsolved} > {data.solved? 'solved': 'unsolved'} </p>
+        <br />
         <p className = {styles.description}> Description: {data.getCase.description} </p>
+        <br />
+
         <p className = {styles.cluestitle}> Clues: </p>
+
+        <br />
         <ol className = {styles.clues}>
-          {data.getCase.clues.map( (x, idx) => <li key = {idx}> {x} </li>)}
+          {data.getCase.clues.map( (x, idx) => <li key = {idx}> {x} </li> )}
         </ol>
         <p className = {styles.attd}> Add to the discussion: </p>
         <Comment query = {GET_CASE} caseid = {data.getCase.id} />
