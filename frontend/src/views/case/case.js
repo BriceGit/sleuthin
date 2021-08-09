@@ -81,7 +81,7 @@ function Case () {
         <br />
         <h2 className = {styles.user} >posted by: {data.getCase.client.username} </h2>
         <br />
-        <p className = {data.solved? styles.solved : styles.unsolved} > {data.solved? 'solved': 'unsolved'} </p>
+        <p className = {data.getCase.solved? styles.solved : styles.unsolved} > {data.getCase.solved? 'solved': 'unsolved'} </p>
         <br />
         <p className = {styles.description}> Description: {data.getCase.description} </p>
         <br />
