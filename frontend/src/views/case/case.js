@@ -71,7 +71,7 @@ function Case () {
         }
       }`
 
-  const {loading, error, data} = useQuery(GET_CASE, {variables: {caseid}});
+  const {loading, error, data} = useQuery(GET_CASE, {variables: {caseid}, fetchPolicy: "network-only"});
 
   if (error) return <p> {error.message} </p>
   if (loading) return <p> loading... </p>
