@@ -34,10 +34,10 @@
 .signUpBox fieldset form input {
   border: none;
 }
-.signUpBox fieldset form #userform {
+.signUpBox fieldset form .userform {
   margin-top: 40px;
 }
-.signUpBox fieldset form #passform {
+.signUpBox fieldset form .passform {
   margin-top: 20px;
   margin-bottom: 20px;
 }
