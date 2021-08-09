@@ -9,6 +9,8 @@ import {
 
 import {gql, useQuery, useMutation} from '@apollo/client';
 
+import styles from './usercases.module.css'
+
 export default function UserCases() {
 
   const GET_USER_CASES = gql`
@@ -83,12 +85,13 @@ export default function UserCases() {
 
   return (
     <div>
-      <ul>
+      <p className = {styles.title}>Your Cases:</p>
+      <ul className = {styles.ul}>
         {data.getCurrentUser.cases.map( (x) => {
           return (
-            <li key = {x.id} caseid = {x.id}>
+            <li key = {x.id} caseid = {x.id} className = {styles.li}>
               <Link to= {`/case/${x.id}` }> {x.title} </ Link>
-              <p> {x.solved? 'solved': 'unsolved'} </p>
+              <p className = {x.solved? styles.solved : styles.unsolved} > {x.solved? 'solved': 'unsolved'} </p>
               <EditButton caseid = {x.id} />
               <SolvedButton caseid = {x.id} />
               <DeleteButton caseid = {x.id} />

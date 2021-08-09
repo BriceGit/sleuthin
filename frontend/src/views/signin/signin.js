@@ -1,12 +1,9 @@
 import React from 'react';
-import './signin.css';
+import styles from './signin.module.css';
 
 import {gql, useMutation} from '@apollo/client';
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
   Redirect
 } from "react-router-dom";
@@ -41,8 +38,8 @@ function SignInHelper(props) {
 
   return (
     <div>
-      {error && <p> Error: {error.message} </p>}
-      {loading && <p> Loading... </p>}
+      {error && <p className  = {styles.message}> Error: {error.message} </p>}
+      {loading && <p className = {styles.message}> Loading... </p>}
       {data && <Redirect to= "/homepage"/>}
     </div>
   )
@@ -59,8 +56,8 @@ export default function SignInForm () {
 
     return (
       <div>
-        <h1> Sleuthin </h1>
-        <div id = "signin-box" >
+        <h1 className = {styles.title}> Sleuthin </h1>
+        <div className = {styles.signInBox}>
           {startSignInQuery ||
             <fieldset>
               <legend> Sign In </legend>
@@ -73,7 +70,7 @@ export default function SignInForm () {
                 <div id = "passform" >
                   < label > Password < /label>
                   <input type = "password" onChange = {e => setPassword(e.target.value)} />
-                  <input id = "submit" type = "submit" onClick = {e =>  {e.preventDefault(); start(true)}} />
+                  <input className = {styles.submit} id = "submit" type = "submit" onClick = {e =>  {e.preventDefault(); start(true)}} />
                 </ div>
                 <br / >
                 <Link to = "/signup"> Sign Up < /Link>

@@ -1,10 +1,16 @@
 import React from 'react';
 
+import {useEffect} from 'react';
+
+import styles from './homepage.module.css';
+
 import {
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
 import {gql, useQuery} from '@apollo/client';
+
 
 function Cases() {
 
@@ -32,9 +38,9 @@ function Cases() {
       <ul>
         {data.getAllCases.map( (x) => {
           return (
-            <li key = {x.id}>
-              <Link to= {`/case/${x.id}` }> {x.title} </ Link>
-              <p> {x.solved? 'solved': 'unsolved'} </p>
+            <li key = {x.id} className = {styles.li}>
+              <Link to= {`/case/${x.id}` } className = {styles.a}> {x.title} </ Link>
+              <p className = {x.solved? styles.solved : styles.unsolved} > {x.solved? 'solved': 'unsolved'} </p>
             </li>
           );
         })}
@@ -44,17 +50,19 @@ function Cases() {
 }
 
 export default function HomePage() {
+
   return (
-    <div>
-      <header>
-        Sleuthin—A mystery is afoot!
-        <nav>
-          <Link to = "/homepage"> Home </Link>
-          <Link to = "/postcase"> Post a Case </Link>
-          <Link to = "/usercases"> My cases </Link>
+    <div className = {styles.container}>
+      <header className = {styles.header}>
+        <h1> Sleuthin: </h1>
+        <h2> A mystery solving social network </h2>
+        <nav className = {styles.nav}>
+          <Link to = "/homepage" className ="homelink"> Home </Link>
+          <Link to = "/postcase" className = "homelink"> Post a Case </Link>
+          <Link to = "/usercases" className = "homelink"> My cases </Link>
         </nav>
       </header>
-      <div>
+      <div className = {styles.cases}>
         <Cases />
       </div>
 

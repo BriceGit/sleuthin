@@ -4,6 +4,8 @@ import {gql, useQuery, useMutation} from '@apollo/client';
 
 import {useParams} from "react-router-dom";
 
+import styles from './case.module.css';
+
 
 function Comment (props) {
 
@@ -34,7 +36,7 @@ function Comment (props) {
 
   return (
     <div>
-      <form>
+      <form className = {styles.comment}>
         <textarea onChange = {x => setComment(x.target.value)} value = {commentText}>
         </textarea>
         <input type = "submit" onClick = {handleSubmit}/>
@@ -58,6 +60,7 @@ function Case () {
           title
           description
           clues
+          solved
           comments {
             user {
               username
@@ -73,19 +76,21 @@ function Case () {
   if (error) return <p> {error.message} </p>
   if (loading) return <p> loading... </p>
   if (data) return (
-    <div>
-      <h1> {data.getCase.title} </h1>
-      <h2> posted by {data.getCase.client.username} </h2>
-      <p> Description: {data.getCase.description} </p>
-      <p> Clues: </p>
-      <ol>
-        {data.getCase.clues.map( (x, idx) => <li key = {idx}> {x} </li>)}
-      </ol>
-      <p> Add to the discussion: </p>
-      <Comment query = {GET_CASE} caseid = {data.getCase.id} />
-      <ul>
-        {data.getCase.comments.map( x => <li key = {x.id}> <p> {x.user.username}: {x.text} </p> </li>)}
-      </ul>
+    <div className = {styles.container}>
+        <h1 className = {styles.title}> {data.getCase.title} </h1>
+        <h2 className = {styles.user} >posted by: {data.getCase.client.username} </h2>
+        <p className = {data.solved? styles.solved : styles.unsolved} > {data.solved? 'solved': 'unsolved'} </p>
+        <p className = {styles.description}> Description: {data.getCase.description} </p>
+        <p className = {styles.cluestitle}> Clues: </p>
+        <ol className = {styles.clues}>
+          {data.getCase.clues.map( (x, idx) => <li key = {idx}> {x} </li>)}
+        </ol>
+        <p className = {styles.attd}> Add to the discussion: </p>
+        <Comment query = {GET_CASE} caseid = {data.getCase.id} />
+        < hr />
+        <ul className = {styles.commentList}>
+          {data.getCase.comments.map( x => <li key = {x.id}> <p> {x.user.username}: {x.text} </p> </li>)}
+        </ul>
     </div>
   )
 }

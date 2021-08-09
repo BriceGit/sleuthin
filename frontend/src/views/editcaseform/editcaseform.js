@@ -6,7 +6,7 @@ import {gql, useMutation, useQuery} from '@apollo/client';
 
 import {Redirect, useParams} from 'react-router';
 
-import './editcaseform.css'
+import styles from './editcaseform.module.css';
 
 
 const GET_CASE = gql`
@@ -58,24 +58,37 @@ function GenericCaseForm(props) {
   }
 
   return (
-    <div>
-      <fieldset>
-        <legend> post a case </legend>
+    <div className = {styles.container} >
+      <fieldset className = {styles.fieldset}>
+        <legend>edit case</legend>
         <form>
-          <label> title </label>
-          <input type = "text" onChange = {(x) => setTitle(x.target.value)} value = {title}/>
+          <div className = {styles.titleform} >
+            <label>title</label>
+            <input type = "text" onChange = {(x) => setTitle(x.target.value)} value = {title}/>
+          </div>
           <br />
-          <label> description </label>
-          <textarea onChange = {(x) => setDescription(x.target.value)} value = {description}/>
+          <div className = {styles.description}>
+            <label>description</label>
+            <textarea onChange = {(x) => setDescription(x.target.value)} value = {description}/>
+          </div>
           <br />
-          <label> Clue: </label>
-          <textarea onChange = {(x) => setClueInput(x.target.value)} value = {clueInput}/>
+          <div className = {styles.clueform}>
+            <label>Clue:</label>
+            <textarea onChange = {(x) => setClueInput(x.target.value)} value = {clueInput}/>
+            <button onClick = {handleSubmitClue}> Add Clue </button>
+          </div>
           <br />
-          <button onClick = {handleSubmitClue}> Add Clue </button>
-          <ol>
-            { clues.map( (element, idx) => <li key = {idx} index = {idx} id = "clue" onClick = {handleClueClick}> {element} </li>) }
-          </ol>
-          <input type = "submit" onClick = {handleSubmit}/>
+          <div id = "clues">
+            <div>
+              <p>Clues:</p>
+              <ol>
+                { clues.map( (element, idx) => <li key = {idx} index = {idx} className = {styles.clue} onClick = {handleClueClick}> {element} </li>) }
+              </ol>
+            </div>
+          </div>
+          <div className = {styles.submit}>
+            <button onClick = {handleSubmit}>Submit Case </button>
+          </div>
         </form>
       </ fieldset>
       {data && <Redirect to = "/homepage" />}
@@ -98,9 +111,4 @@ export default function EditCaseForm (props) {
       {error && <p> {error.message} </p>}
     </div>
   )
-
-
-
-
-
 }

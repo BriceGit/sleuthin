@@ -1,0 +1,41 @@
+.message, .title {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  color: #ffe3fe;
+}
+
+.li {
+  display: inline-block;
+  margin-left:  30px;
+  margin-top: 20px;
+  background-color: rgb(255, 227, 254);
+  border-radius: 30px;
+  padding: 20px;
+  width: 200px;
+  height: 200px;
+  a {
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    transition-duration: 2s;
+  }
+  a:hover {
+    color: orange;
+  }
+  p {
+    font-size: 20px;
+  }
+  .solved {
+    color: green;
+  }
+  .unsolved {
+    color: red;
+  }
+}
+
+.ul {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}

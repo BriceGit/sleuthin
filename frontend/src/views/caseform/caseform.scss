@@ -1,140 +1,82 @@
-// html, body, div, span, applet, object, iframe,
-// h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-// a, abbr, acronym, address, big, cite, code,
-// del, dfn, em, img, ins, kbd, q, s, samp,
-// small, strike, strong, sub, sup, tt, var,
-// b, u, i, center,
-// dl, dt, dd, ol, ul, li,
-// fieldset, form, label, legend,
-// table, caption, tbody, tfoot, thead, tr, th, td,
-// article, aside, canvas, details, embed,
-// figure, figcaption, footer, header, hgroup,
-// menu, nav, output, ruby, section, summary,
-// time, mark, audio, video {
-// 	margin: 0;
-// 	padding: 0;
-// 	border: 0;
-// 	font-size: 100%;
-// 	font: inherit;
-// 	vertical-align: baseline;
-// }
-// /* HTML5 display-role reset for older browsers */
-// article, aside, details, figcaption, figure,
-// footer, header, hgroup, menu, nav, section {
-// 	display: block;
-// }
-// body {
-// 	line-height: 1;
-// }
-// ol, ul {
-// 	list-style: none;
-// }
-// blockquote, q {
-// 	quotes: none;
-// }
-// blockquote:before, blockquote:after,
-// q:before, q:after {
-// 	content: '';
-// 	content: none;
-// }
-// table {
-// 	border-collapse: collapse;
-// 	border-spacing: 0;
-// }
-//
-// #clue:hover {
-//   text-decoration: line-through;
-//   color: red;
-// }
-//
-// html {
-//     height: 100%;
-// }
-// body {
-//     height: 100%;
-//     margin: 0;
-//     background-repeat: no-repeat;
-//     background-attachment: fixed;
-// }
-//
-//
-// body {
-//   background: linear-gradient(rgb(68, 10, 103),rgb(255, 227, 254)) ;
-//   background-size: cover;
-//   font-family: monospace;
-//   ol {
-//     display: block;
-//   }
-//   div {
-//     fieldset {
-//       width:80%;
-//       margin-left: auto;
-//       margin-right: auto;
-//       margin-top: 25px;
-//       background-color: rgb(180, 174, 232);
-//       display: flex;
-//       justify-content: center;
-//       border-radius: 20px;
-//
-//       legend {
-//         font-size: 30px;
-//         margin-left: auto;
-//         margin-right: auto;
-//         background: rgb(255, 227, 254);
-//         border-radius: 80px;
-//       }
-//
-//       li {
-//         list-style: disc;
-//         margin-top: 20px;
-//       }
-//
-//
-//       button {
-//         background: rgb(255, 227, 254);
-//       }
-//
-//       form {
-//
-//         label {
-//           font-size: 20px;
-//           margin-right: 30px;
-//           width: 130px;
-//           float:left;
-//         }
-//
-//         #titleform {
-//           margin-top: 40px;
-//         }
-//
-//         #clueform {
-//           button {
-//             margin-left: 20px;
-//           }
-//         }
-//
-//         #clues {
-//           display: flex;
-//           justify-content: center;
-//           margin-top: 20px;
-//           margin-bottom: 20PX;
-//
-//           p {
-//             font-size: 20px;
-//           }
-//         }
-//
-//         #submit {
-//           display: flex;
-//           justify-content: center;
-//           margin-bottom: 10px;
-//         }
-//
-//         input {
-//           border-style: none;
-//         }
-//
-//       }
-//     }
-//   }
-// }
+.clue:hover {
+  text-decoration: line-through;
+  color: red;
+}
+
+.ol {
+  display: block;
+}
+.container {
+  .fieldset {
+		padding: 2.5%;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    background-color: rgb(180, 174, 232);
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+
+    legend {
+      font-size: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      background: rgb(255, 227, 254);
+      border-radius: 80px;
+    }
+
+    li {
+      list-style: disc;
+      margin-top: 20px;
+    }
+
+
+    button {
+      background: rgb(255, 227, 254);
+    }
+
+    form {
+
+      label {
+        font-size: 20px;
+        margin-right: 30px;
+        width: 130px;
+        float:left;
+      }
+
+      .titleform {
+        margin-top: 40px;
+      }
+
+      .clueform {
+        button {
+          margin-left: 20px;
+        }
+      }
+
+      .clues {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20PX;
+
+        p {
+          font-size: 20px;
+        }
+      }
+
+      .submit {
+        display: flex;
+        justify-content: center;
+				margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      input {
+        border-style: none;
+      }
+
+    }
+  }
+}

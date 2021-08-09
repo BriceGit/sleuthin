@@ -1,5 +1,5 @@
 import React from 'react';
-import './signup.css';
+import styles from './signup.module.css';
 
 import {gql, useMutation} from '@apollo/client';
 
@@ -23,8 +23,8 @@ function SignUpHelper(props) {
         username: props.username,
         password: props.password
       },
-      onError(err) {
-        console.log(err);
+      onError: () => {
+
       }
     }
   );
@@ -37,8 +37,8 @@ function SignUpHelper(props) {
 
   return (
     <div>
-      {error && <p> Error: {error.message} </p>}
-      {loading && <p> Loading... </p>}
+      {error && <p className = {styles.message}> Error: User already registered </p>}
+      {loading && <p className = {styles.message} > Loading... </p>}
       {data && <Redirect to= "/homepage"/>}
     </div>
   )
@@ -55,22 +55,22 @@ export default function SignUpForm () {
 
     return (
       <div>
-        <h1> Sleuthin </h1>
-        <div id = "signup-box" >
+        <h1 className = {styles.title} > Sleuthin </h1>
+        <div className = {styles.signUpBox}>
           {startSignUpQuery ||
-              <fieldset>
+              <fieldset className = {styles.fieldset}>
                 <legend> Sign Up </legend>
 
                 <form >
                   <div id = "userform" >
                     <label > Username < /label>
-                    <input name = "username"type = "text"onChange = {e => setUsername(e.target.value)} />
+                    <input name = "username" type = "text" onChange = {e => setUsername(e.target.value)} />
                   </div>
-                <br / >
+                  <br / >
                   <div id = "passform">
                     < label > Password < /label>
                     <input name = "password"type = "password" onChange = {e => setPassword(e.target.value)}/>
-                    <input id = "submit" type = "submit" onClick = {e =>  {e.preventDefault(); start(true)}} />
+                    <input className = {styles.submit} id = "submit" type = "submit" onClick = {e =>  {e.preventDefault(); start(true)}} />
                   </div>
                 </form>
               </fieldset>

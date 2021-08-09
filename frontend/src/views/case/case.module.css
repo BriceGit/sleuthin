@@ -1,0 +1,65 @@
+.container {
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: auto;
+  background-color: #ffe3fe;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.container .title {
+  display: flex;
+  font-size: 70px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.container .user {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.container .description {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.container .cluestitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.container .clues {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.container .commentList {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.container .attd {
+  display: flex;
+  justify-content: center;
+}
+.container .comment {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.container .solved {
+  display: flex;
+  color: green;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.container .unsolved {
+  display: flex;
+  color: red;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/*# sourceMappingURL=case.module.css.map */

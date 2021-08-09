@@ -1,6 +1,6 @@
 import React from 'react';
+import {useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import SignIn from './views/signin/signin.js'
 import SignUp from './views/signup/signup.js'
 import HomePage from './views/homepage/homepage.js'
@@ -8,6 +8,9 @@ import Case from './views/case/case.js'
 import CaseForm from './views/caseform/caseform.js'
 import EditCaseForm from './views/editcaseform/editcaseform.js'
 import UserCases from './views/usercases/usercases.js'
+
+import './reset.module.css';
+
 
 import {
   ApolloClient,
@@ -50,6 +53,19 @@ const client = new ApolloClient({
 
 
 function App() {
+  useEffect(() => {
+    document.documentElement.style.height = "100%";
+    document.documentElement.style.margin = "0";
+    document.documentElement.style.padding = "0";
+    document.querySelector("body").style.height = "100%";
+    document.querySelector("body").style.margin = "0";
+    document.querySelector("body").style.padding = "0";
+    document.querySelector("body").style.backgroundRepeat = "no-repeat";
+    document.querySelector("body").style.backgroundAttachment = "fixed";
+    document.querySelector("body").style.backgroundImage = "linear-gradient(rgb(68, 10, 103),rgb(255, 227, 254))";
+    document.querySelector("body").style.fontFamily = "monospace";
+  })
+
   return (
     <Router>
       <Switch>

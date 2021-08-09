@@ -6,7 +6,7 @@ import {gql, useMutation} from '@apollo/client';
 
 import {Redirect} from 'react-router';
 
-import './caseform.css'
+import styles from './caseform.module.css';
 
 
 const GET_CASES = gql`
@@ -25,8 +25,6 @@ export default function CaseForm (props) {
   let [description, setDescription] = useState("");
   let [clues, setClues] = useState([]);
   let [clueInput, setClueInput] = useState("");
-  let [debug, setDebug]  = useState(null);
-  let [debug1, setDebug1]  = useState(null);
 
   const POST_CASE = gql`
     mutation pcase($input: CaseInput! ) {
@@ -65,7 +63,6 @@ function handleSubmitClue(e) {
 
 function handleClueClick(e) {
   let idx = e.target.getAttribute('index');
-  setDebug(idx);
 
   let newClues = clues.filter(function (element, index) {
     return (index != idx);
@@ -75,21 +72,21 @@ function handleClueClick(e) {
 }
 
   return (
-    <div>
-      <fieldset>
+    <div className = {styles.container}>
+      <fieldset className = {styles.fieldset}>
         <legend>Post a Case</legend>
         <form>
-          <div id = "titleform">
+          <div className = {styles.titleform}>
             <label>Title</label>
             <input type = "text" onChange = {(x) => setTitle(x.target.value)} />
           </div>
           <br />
-          <div id = "description">
+          <div className = {styles.description}>
             <label>Description</label>
             <textarea onChange = {(x) => setDescription(x.target.value)} />
           </div>
           <br />
-          <div id = "clueform">
+          <div className = {styles.clueform}>
             <label>Clue</label>
             <textarea onChange = {(x) => setClueInput(x.target.value)} value = {clueInput}/>
             <button onClick = {handleSubmitClue}> Add Clue </button>
@@ -99,11 +96,11 @@ function handleClueClick(e) {
             <div>
               <p>Clues:</p>
               <ol>
-                { clues.map( (element, idx) => <li key = {idx} index = {idx} id = "clue" onClick = {handleClueClick}> {element} </li>) }
+                { clues.map( (element, idx) => <li key = {idx} index = {idx} className = {styles.clue} onClick = {handleClueClick}> {element} </li>) }
               </ol>
             </div>
           </div>
-          <div id= "submit">
+          <div className = {styles.submit}>
             <button onClick = {handleSubmit}>Submit Case </button>
           </div>
         </form>
