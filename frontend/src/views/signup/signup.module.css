@@ -35,10 +35,11 @@
   border: none;
 }
 .signUpBox fieldset form #userform {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .signUpBox fieldset form #passform {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .submit {
