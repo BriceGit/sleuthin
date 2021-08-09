@@ -37,7 +37,7 @@ function SignUpHelper(props) {
 
   return (
     <div>
-      {error && <p className = {styles.message}> Error: User already registered </p>}
+      {error && <p className = {styles.message}> Error: User already registered. Please refresh and try again.</p>}
       {loading && <p className = {styles.message} > Loading... </p>}
       {data && <Redirect to= "/homepage"/>}
     </div>
