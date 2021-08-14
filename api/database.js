@@ -3,7 +3,7 @@ const db = mongoose.connection;
 require('dotenv').config();
 
 function initDB() {
-  mongoose.connect(process.env.CONNECTION_STRING,
+  mongoose.connect("mongodb://localhost:27017/sleuthin",
    {
     useNewUrlParser: true,
     useUnifiedTopology: true,
