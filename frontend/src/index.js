@@ -40,7 +40,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 const httpLink = new HttpLink({
-  uri:'https://dashboard.heroku.com/apps/rocky-caverns-57095/app'
+  uri:'https://rocky-caverns-57095.herokuapp.com/app'
 })
 
 
