@@ -43,7 +43,6 @@ const typeDefs = gql`
     getCurrentUser: User
     getUser(userid: String!): User
     getCase(caseid: String!): Case
-    getPage(cursor: ID!): PageResult!
   }
 
   type Mutation {
