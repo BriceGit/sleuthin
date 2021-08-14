@@ -6,7 +6,7 @@ import {gql, useMutation} from '@apollo/client';
 
 import {Redirect} from 'react-router';
 
-import styles from './caseform.module.css';
+import styles from '../../stylesheets/caseform.module.css';
 
 
 const GET_CASES = gql`

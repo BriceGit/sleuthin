@@ -2,7 +2,7 @@ import React from 'react';
 
 import {useEffect} from 'react';
 
-import styles from './homepage.module.css';
+import styles from '../../stylesheets/homepage.module.css';
 
 import {
   Link,

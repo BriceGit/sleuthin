@@ -27,20 +27,22 @@ import {
 } from "react-router-dom";
 
 
-
+//use apollo link to pass token
 const authLink = new ApolloLink((operation, forward) => {
   operation.setContext(
     {
       headers:
       {
+        //get token from sessionStorage and put into header
         authorization: window.sessionStorage.getItem('token')
       }
     });
   return forward(operation);
 });
 
+
 const httpLink = new HttpLink({
-  uri:'https://rocky-caverns-57095.herokuapp.com/app'
+  uri:'https://sleuthin.herokuapp.com/app'
 })
 
 

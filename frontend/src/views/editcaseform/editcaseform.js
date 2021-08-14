@@ -6,7 +6,7 @@ import {gql, useMutation, useQuery} from '@apollo/client';
 
 import {Redirect, useParams} from 'react-router';
 
-import styles from './editcaseform.module.css';
+import styles from '../../stylesheets/editcaseform.module.css';
 
 
 const GET_CASE = gql`

@@ -9,7 +9,7 @@ import {
 
 import {gql, useQuery, useMutation} from '@apollo/client';
 
-import styles from './usercases.module.css'
+import styles from '../../stylesheets/usercases.module.css'
 
 export default function UserCases() {
 

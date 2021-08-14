@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './signup.module.css';
+import styles from '../../stylesheets/signup.module.css';
 
 import {gql, useMutation} from '@apollo/client';
 

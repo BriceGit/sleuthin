@@ -4,7 +4,7 @@ import {gql, useQuery, useMutation} from '@apollo/client';
 
 import {useParams} from "react-router-dom";
 
-import styles from './case.module.css';
+import styles from '../../stylesheets/case.module.css';
 
 
 function Comment (props) {
