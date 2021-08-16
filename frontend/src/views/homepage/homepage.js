@@ -59,7 +59,7 @@ export default function HomePage() {
         <nav className = {styles.nav}>
           <Link to = "/homepage" className ="homelink"> Home </Link>
           <Link to = "/postcase" className = "homelink"> Post a Case </Link>
-          <Link to = "/usercases" className = "homelink"> My cases </Link>
+          <Link to = "/usercases" className = "homelink"> My Cases </Link>
         </nav>
       </header>
       <div className = {styles.cases}>
