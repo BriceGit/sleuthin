@@ -54,8 +54,8 @@ export default function HomePage() {
   return (
     <div className = {styles.container}>
       <header className = {styles.header}>
-        <h1> Sleuthin: </h1>
-        <h2> A mystery solving social network </h2>
+        <h1>Sleuthin</h1>
+        <h2>A mystery solving social network</h2>
         <nav className = {styles.nav}>
           <Link to = "/homepage" className ="homelink"> Home </Link>
           <Link to = "/postcase" className = "homelink"> Post a Case </Link>

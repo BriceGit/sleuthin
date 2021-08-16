@@ -58,5 +58,8 @@
   color: purple;
   margin-bottom: 10px;
 }
+.signInBox fieldset form .signUpLink:hover {
+  text-decoration: underline;
+}
 
 /*# sourceMappingURL=signin.module.css.map */
