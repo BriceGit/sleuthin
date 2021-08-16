@@ -7,39 +7,26 @@ import {
   Redirect
 } from 'react-router';
 
+const SIGN_UP = gql`
+  mutation signup($username: String!, $password: String!) {
+    signUp(username: $username, password: $password)
+  }
+`;
 
 function SignUpHelper(props) {
 
-  const SIGN_UP = gql`
-    mutation signup($username: String!, $password: String!) {
-      signUp(username: $username, password: $password)
-    }
-  `;
 
+  props.mutationFn({variables: {username: props.username, password: props.password}});
 
-  const [signUp, { loading, error, data }] = useMutation(SIGN_UP,
-    {
-      variables: {
-        username: props.username,
-        password: props.password
-      },
-      onError: () => {
-
-      }
-    }
-  );
-
-  signUp();
-
-  if (data) {
-    window.sessionStorage.setItem("token", data.signUp);
+  if (props.data) {
+    window.sessionStorage.setItem("token", props.data.signUp);
   }
 
   return (
     <div>
-      {error && <p className = {styles.message}> Error: User already registered. Please refresh and try again.</p>}
-      {loading && <p className = {styles.message} > Loading... </p>}
-      {data && <Redirect to= "/homepage"/>}
+      {props.error && <p className = {styles.message}> {props.error.message} </p>}
+      {props.loading && <p className = {styles.message} > Loading... </p>}
+      {props.data && <Redirect to= "/homepage"/>}
     </div>
   )
 
@@ -51,6 +38,8 @@ export default function SignUpForm () {
     let [username, setUsername] = React.useState("");
     let [password, setPassword] = React.useState("");
     let [startSignUpQuery, start] = React.useState(false);
+
+    const [signUp, { loading, error, data }] = useMutation(SIGN_UP);
 
 
     return (
@@ -75,7 +64,7 @@ export default function SignUpForm () {
               </fieldset>
             }
             {startSignUpQuery &&
-              <SignUpHelper username = {username} password = {password} />
+              <SignUpHelper username = {username} password = {password} mutationFn = {signUp} data = {data} loading = {loading} error = {error} />
             }
         </ div>
       </div>
