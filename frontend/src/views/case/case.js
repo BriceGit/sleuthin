@@ -76,6 +76,8 @@ function Case () {
         }
       }`
 
+  //
+
   const {loading, error, data} = useQuery(GET_CASE, {variables: {caseid}, fetchPolicy: "network-only", pollInterval: 500});
 
   if (error) return <p> {error.message} </p>
