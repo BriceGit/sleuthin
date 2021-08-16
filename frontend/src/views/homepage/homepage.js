@@ -57,11 +57,12 @@ export default function HomePage() {
         <h1>Sleuthin</h1>
         <h2>A mystery solving social network</h2>
         <nav className = {styles.nav}>
-          <Link to = "/homepage" className ="homelink"> Home </Link>
-          <Link to = "/postcase" className = "homelink"> Post a Case </Link>
-          <Link to = "/usercases" className = "homelink"> My Cases </Link>
+          <Link to = "/homepage" className ="homelink">Home</Link>
+          <Link to = "/postcase" className = "homelink">Post a Case</Link>
+          <Link to = "/usercases" className = "homelink">My Cases</Link>
         </nav>
       </header>
+      <hr />
       <div className = {styles.cases}>
         <Cases />
       </div>

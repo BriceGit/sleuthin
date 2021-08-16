@@ -85,6 +85,16 @@ export default function UserCases() {
 
   return (
     <div>
+    <header className = {styles.header}>
+      <h1>Sleuthin</h1>
+      <h2>A mystery solving social network</h2>
+      <nav className = {styles.nav}>
+        <Link to = "/homepage" className ="homelink">Home</Link>
+        <Link to = "/postcase" className = "homelink">Post a Case</Link>
+        <Link to = "/usercases" className = "homelink">My Cases</Link>
+      </nav>
+    </header>
+    <hr />
       <p className = {styles.title}>Your Cases:</p>
       <ul className = {styles.ul}>
         {data.getCurrentUser.cases.map( (x) => {
@@ -92,7 +102,7 @@ export default function UserCases() {
             <li key = {x.id} caseid = {x.id} className = {styles.li}>
               <Link to= {`/case/${x.id}` }> {x.title} </ Link>
               <p className = {x.solved? styles.solved : styles.unsolved} > {x.solved? 'solved': 'unsolved'} </p>
-              <EditButton caseid = {x.id} />
+              <EditButton  className = {styles.editButton} caseid = {x.id} />
               <SolvedButton caseid = {x.id} />
               <DeleteButton caseid = {x.id} />
             </li>

@@ -63,31 +63,27 @@ function GenericCaseForm(props) {
   return (
     <div className = {styles.container} >
       <fieldset className = {styles.fieldset}>
-        <legend>edit case</legend>
+        <legend>Edit Case</legend>
         <form>
           <div className = {styles.titleform} >
-            <label>title</label>
+            <label>Title:</label>
             <input type = "text" onChange = {(x) => setTitle(x.target.value)} value = {title}/>
           </div>
-          <br />
           <div className = {styles.description}>
-            <label>description</label>
+            <label>Description:</label>
             <textarea onChange = {(x) => setDescription(x.target.value)} value = {description}/>
           </div>
-          <br />
           <div className = {styles.clueform}>
             <label>Clue:</label>
             <textarea onChange = {(x) => setClueInput(x.target.value)} value = {clueInput}/>
             <button onClick = {handleSubmitClue}> Add Clue </button>
           </div>
-          <br />
-          <div id = "clues">
-            <div>
-              <p>Clues:</p>
-              <ol>
-                { clues.map( (element, idx) => <li key = {idx} index = {idx} className = {styles.clue} onClick = {handleClueClick}> {element} </li>) }
-              </ol>
-            </div>
+          <hr />
+          <div className = {styles.clues}>
+            <p>Clues:</p>
+            <ol>
+              { clues.map( (element, idx) => <li key = {idx} index = {idx} className = {styles.clue} onClick = {handleClueClick}> {element} </li>) }
+            </ol>
           </div>
           <div className = {styles.submit}>
             <button onClick = {handleSubmit}>Submit Case </button>

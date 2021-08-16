@@ -14,6 +14,7 @@
   display: flex;
   justify-content: center;
   border-radius: 20px;
+  background-color: #E0E0E0;
 }
 .signUpBox fieldset legend {
   font-size: 30px;
@@ -45,12 +46,14 @@
   background-color: inherit;
   border-radius: 80px;
   border-color: purple;
+  background-color: white;
   color: purple;
   border-width: 2px;
   margin-left: 30px;
 }
 .signUpBox fieldset form .passform .submit:hover {
   cursor: pointer;
+  background-color: white;
 }
 .signUpBox fieldset form .signUpLink {
   display: block;

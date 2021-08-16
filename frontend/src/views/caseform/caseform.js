@@ -4,7 +4,10 @@ import {useState} from 'react';
 
 import {gql, useMutation} from '@apollo/client';
 
-import {Redirect} from 'react-router';
+import {
+  Link,
+  Redirect
+} from "react-router-dom";
 
 import styles from '../../stylesheets/caseform.module.css';
 
@@ -77,6 +80,16 @@ function handleClueClick(e) {
 
   return (
     <div className = {styles.container}>
+    <header className = {styles.header}>
+      <h1>Sleuthin</h1>
+      <h2>A mystery solving social network</h2>
+      <nav className = {styles.nav}>
+        <Link to = "/homepage" className ="homelink">Home</Link>
+        <Link to = "/postcase" className = "homelink">Post a Case</Link>
+        <Link to = "/usercases" className = "homelink">My Cases</Link>
+      </nav>
+    </header>
+    <hr />
       <fieldset className = {styles.fieldset}>
         <legend>Post a Case</legend>
         <form>
@@ -84,25 +97,23 @@ function handleClueClick(e) {
             <label>Title</label>
             <input type = "text" onChange = {(x) => setTitle(x.target.value)} />
           </div>
-          <br />
+
           <div className = {styles.description}>
             <label>Description</label>
             <textarea onChange = {(x) => setDescription(x.target.value)} />
           </div>
-          <br />
+
           <div className = {styles.clueform}>
             <label>Clue</label>
             <textarea onChange = {(x) => setClueInput(x.target.value)} value = {clueInput}/>
             <button onClick = {handleSubmitClue}> Add Clue </button>
           </div>
           <hr />
-          <div id = "clues">
-            <div>
-              <p>Clues:</p>
-              <ol>
-                { clues.map( (element, idx) => <li key = {idx} index = {idx} className = {styles.clue} onClick = {handleClueClick}> {element} </li>) }
-              </ol>
-            </div>
+          <div className = {styles.clues}>
+            <p>Clues:</p>
+            <ol>
+              { clues.map( (element, idx) => <li key = {idx} index = {idx} className = {styles.clue} onClick = {handleClueClick}> {element} </li>) }
+            </ol>
           </div>
           <div className = {styles.submit}>
             <button onClick = {handleSubmit}>Submit Case </button>

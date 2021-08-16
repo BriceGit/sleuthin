@@ -1,12 +1,42 @@
+.header h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+}
+.header h2 {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.header .nav {
+  height: 40px;
+  display: flex;
+  color: black;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.header .nav a {
+  text-decoration: none;
+  font-size: 30px;
+  color: purple;
+}
+.header .nav a:hover {
+  text-decoration: underline;
+}
+
 .container {
   margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
   width: 80%;
   border-radius: 30px;
+  border-width: 5px;
+  border: solid;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #E0E0E0;
 }
 .container .title {
   font-size: 70px;
@@ -29,8 +59,29 @@
   margin-bottom: 20px;
   list-style: disc;
 }
+.container .attd {
+  margin-bottom: 20px;
+}
 .container .comment {
   margin-bottom: 20px;
+}
+.container .comment textarea {
+  width: 200px;
+}
+.container .comment .submit {
+  box-shadow: none;
+  font-family: inherit;
+  background-color: inherit;
+  border-radius: 80px;
+  border-color: purple;
+  background-color: white;
+  color: purple;
+  border-width: 2px;
+  margin-left: 30px;
+}
+.container .comment .submit:hover {
+  cursor: pointer;
+  background-color: white;
 }
 .container .solved {
   color: green;
@@ -39,6 +90,9 @@
 .container .unsolved {
   color: red;
   margin-bottom: 20px;
+}
+.container .hr {
+  width: 80%;
 }
 
 /*# sourceMappingURL=case.module.css.map */

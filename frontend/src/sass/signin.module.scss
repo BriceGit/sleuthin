@@ -16,6 +16,7 @@
     display: flex;
     justify-content: center;
     border-radius: 20px;
+    background-color: #E0E0E0;
 
     legend {
       font-size: 30px;
@@ -50,7 +51,7 @@
         .submit {
           box-shadow: none;
           font-family: inherit;
-          background-color: inherit;
+          background-color: white;
           border-radius: 80px;
           border-color: purple;
           color: purple;
