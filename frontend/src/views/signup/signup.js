@@ -24,7 +24,7 @@ function SignUpHelper(props) {
 
   return (
     <div>
-      {props.error && <p className = {styles.message}> {props.error.message} </p>}
+      {props.error && <p className = {styles.message}> Error signing up. please refresh and try again. </p>}
       {props.loading && <p className = {styles.message} > Loading... </p>}
       {props.data && <Redirect to= "/homepage"/>}
     </div>
