@@ -1,0 +1,73 @@
+.message, .title {
+   display: flex;
+   justify-content: center;
+   font-size: 50px;
+
+}
+
+.signUpBox {
+  fieldset {
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    border-width: 5px;
+    border-style: solid;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+
+    legend {
+      font-size: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 80px;
+    }
+
+    label {
+      font-size: 20px;
+      width: 50px;
+      float: left;
+    }
+
+
+    form {
+
+      input {
+        border-style: solid;
+        border-color: black;
+        margin-left: 90px;
+        font-family: inherit;
+      }
+
+      .userform {
+        margin-top: 40px;
+      }
+
+      .passform {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        .submit {
+          box-shadow: none;
+          font-family: inherit;
+          background-color: inherit;
+          border-radius: 80px;
+          border-color: purple;
+          color: purple;
+          border-width: 2px;
+          margin-left: 30px;
+        }
+        .submit:hover {
+          cursor: pointer;
+        }
+      }
+
+      .signUpLink {
+        display: block;
+        text-decoration: none;
+        color: purple;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

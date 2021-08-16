@@ -2,6 +2,8 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
 :global(html), :global(body), :global(div), :global(span), :global(applet), :global(object), :global(iframe),
 :global(h1), :global(h2), :global(h3), :global(h4), :global(h5), :global(h6), :global(p), :global(blockquote), :global(pre),
 :global(a), :global(abbr), :global(acronym), :global(address), :global(big), :global(cite), :global(code),
@@ -40,8 +42,11 @@
 :global(q:before), :global(q:after) {
 	content: '';
 	content: none;
-} 
+}
 :global(table) {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+:global(body) {
+	font-family: 'Secular One'
 }

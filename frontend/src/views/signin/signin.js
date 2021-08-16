@@ -60,20 +60,18 @@ export default function SignInForm () {
         <div className = {styles.signInBox}>
           {startSignInQuery ||
             <fieldset>
-              <legend> Sign In </legend>
+              <legend>Sign In</legend>
               <form>
                 <div className = {styles.userform}>
-                  <label > Username < /label>
+                  <label >Username< /label>
                   <input type = "text"onChange = {e => setUsername(e.target.value)} />
                 </div>
-                <br / >
                 <div className = {styles.passform} >
-                  < label > Password < /label>
+                  < label >Password< /label>
                   <input type = "password" onChange = {e => setPassword(e.target.value)} />
-                  <input className = {styles.submit} id = "submit" type = "submit" onClick = {e =>  {e.preventDefault(); start(true)}} />
+                  <button className = {styles.submit}  onClick = {e =>  {e.preventDefault(); start(true)}} > Sign In </button>
                 </ div>
-                <br / >
-                <Link to = "/signup"> Sign Up < /Link>
+                <Link to = "/signup" className = {styles.signUpLink}>Don't have an account? Sign Up here.< /Link>
               </form>
             </fieldset>
           }

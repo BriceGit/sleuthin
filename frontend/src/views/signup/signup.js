@@ -66,11 +66,10 @@ export default function SignUpForm () {
                     <label > Username < /label>
                     <input name = "username" type = "text" onChange = {e => setUsername(e.target.value)} />
                   </div>
-                  <br / >
                   <div className = {styles.passform}>
                     < label > Password < /label>
                     <input name = "password"type = "password" onChange = {e => setPassword(e.target.value)}/>
-                    <input className = {styles.submit} id = "submit" type = "submit" onClick = {e =>  {e.preventDefault(); start(true)}} />
+                    <button className = {styles.submit} onClick = {e =>  {e.preventDefault(); start(true)}} >Sign Up</button>
                   </div>
                 </form>
               </fieldset>
