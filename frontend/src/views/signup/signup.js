@@ -18,9 +18,7 @@ function SignUpHelper(props) {
 
   props.mutationFn({variables: {username: props.username, password: props.password}});
 
-  if (props.data) {
-    window.sessionStorage.setItem("token", props.data.signUp);
-  }
+
 
   return (
     <div>
@@ -41,6 +39,10 @@ export default function SignUpForm () {
 
     const [signUp, { loading, error, data }] = useMutation(SIGN_UP);
 
+    if (data) {
+      window.sessionStorage.setItem("token", data.signUp);
+    }
+
 
     return (
       <div>
@@ -57,14 +59,22 @@ export default function SignUpForm () {
                   </div>
                   <div className = {styles.passform}>
                     < label > Password < /label>
-                    <input name = "password"type = "password" onChange = {e => setPassword(e.target.value)}/>
-                    <button className = {styles.submit} onClick = {e =>  {e.preventDefault(); start(true)}} >Sign Up</button>
+                    <input name = "password" type = "password" onChange = {e => setPassword(e.target.value)}/>
+                    <button className = {styles.submit} onClick = {e =>
+                       {e.preventDefault();
+                          signUp({variables: {username: username, password: password}});
+                          start(true);
+                        }}>
+                        Sign Up
+                    </button>
                   </div>
                 </form>
               </fieldset>
             }
             {startSignUpQuery &&
-              <SignUpHelper username = {username} password = {password} mutationFn = {signUp} data = {data} loading = {loading} error = {error} />
+              (error && <p className = {styles.message}>Error signing up. Please refresh and try again.</p>) ||
+              (loading && <p className = {styles.message} > Loading... </p>) ||
+              (data && <Redirect to= "/homepage"/>)
             }
         </ div>
       </div>
