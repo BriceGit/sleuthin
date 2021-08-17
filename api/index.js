@@ -20,7 +20,7 @@ const {ApolloServer} = require('apollo-server-express')
 let port = process.env.PORT || 4041;    //general purpose catch statement. Will add more specific error handling at a later date
 
 // app.use(helmet());
-app.use(cors());
+// app.use(cors());
 
 const server = new ApolloServer(
   {
