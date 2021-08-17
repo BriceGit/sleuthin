@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-// const cors = require('cors');
-// // const helmet = require('helmet');
+const cors = require('cors');
+const helmet = require('helmet');
 
 require('dotenv').config();
 
@@ -19,8 +19,8 @@ const {ApolloServer} = require('apollo-server-express')
 
 let port = process.env.PORT || 4041;    //general purpose catch statement. Will add more specific error handling at a later date
 
-// app.use(helmet());
-// app.use(cors());
+app.use(helmet());
+app.use(cors());
 
 const server = new ApolloServer(
   {

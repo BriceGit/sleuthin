@@ -1,12 +1,9 @@
 import React from 'react';
 
-import {useEffect} from 'react';
-
 import styles from '../../stylesheets/homepage.module.css';
 
 import {
   Link,
-  Redirect
 } from "react-router-dom";
 
 import {gql, useQuery} from '@apollo/client';
