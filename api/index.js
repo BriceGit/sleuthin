@@ -3,8 +3,6 @@ const app = express();
 const cors = require('cors');
 const helmet = require('helmet');
 
-require('dotenv').config();
-
 const jwt = require("jsonwebtoken");
 
 const resolvers = require("./resolvers");
@@ -38,7 +36,7 @@ const server = new ApolloServer(
 );
 
 //mount ApolloServer on express appliation
-server.applyMiddleware({app, path: '/app'});
+server.applyMiddleware({app, path: '/api'});
 
 //start listening on 4042
 app.listen(port, () => {
