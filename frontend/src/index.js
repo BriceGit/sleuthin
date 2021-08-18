@@ -42,7 +42,7 @@ const authLink = new ApolloLink((operation, forward) => {
 
 
 const httpLink = new HttpLink({
-  uri:'https://sleuthin.herokuapp.com/app'
+  uri:process.env.API_CONNECTION
 })
 
 
