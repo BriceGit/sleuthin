@@ -3,8 +3,6 @@ const app = express();
 const cors = require('cors');
 const helmet = require('helmet');
 
-require('dotenv').config();
-
 const jwt = require("jsonwebtoken");
 
 const resolvers = require("./resolvers");

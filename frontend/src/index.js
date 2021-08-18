@@ -11,6 +11,8 @@ import UserCases from './views/usercases/usercases.js'
 
 import './reset.module.css';
 
+require('dotenv').config();
+
 
 import {
   ApolloClient,
