@@ -61,14 +61,14 @@ export default function UserCases() {
   }
 
   function DeleteButton (props) {
-    const [markSolved, {loading, error, data}] = useMutation(DELETE_CASE,
+    const [deleteCase, {loading, error, data}] = useMutation(DELETE_CASE,
       {
         variables: { caseid: props.caseid},
         refetchQueries: [{query: GET_USER_CASES}]
       });
 
       return (
-        <button onClick = { markSolved }>delete case</button>
+        <button onClick = { deleteCase }>delete case</button>
       )
   }
 
