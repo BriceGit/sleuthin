@@ -38,7 +38,7 @@ function SignInHelper(props) {
 
   return (
     <div>
-      {error && <p className  = {styles.message}> Error: {error.message} </p>}
+      {error && <p className  = {styles.message}> Error: {error.message}. Please refresh and try again. </p>}
       {loading && <p className = {styles.message}> Loading... </p>}
       {data && <Redirect to= "/homepage"/>}
     </div>
