@@ -38,7 +38,7 @@ const server = new ApolloServer(
 );
 
 //mount ApolloServer on express appliation
-server.applyMiddleware({app, path: '/app'});
+server.applyMiddleware({app, path: '/api'});
 
 //start listening on 4042
 app.listen(port, () => {
