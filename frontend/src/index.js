@@ -11,9 +11,6 @@ import UserCases from './views/usercases/usercases.js'
 
 import './reset.module.css';
 
-require('dotenv').config();
-
-
 import {
   ApolloClient,
   InMemoryCache,
@@ -44,7 +41,7 @@ const authLink = new ApolloLink((operation, forward) => {
 
 
 const httpLink = new HttpLink({
-  uri:process.env.API_CONNECTION
+  uri: process.env.API_CONNECTION
 })
 
 
