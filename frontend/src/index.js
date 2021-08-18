@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import {useEffect} from 'react';
 import ReactDOM from 'react-dom';
@@ -41,7 +43,7 @@ const authLink = new ApolloLink((operation, forward) => {
 
 
 const httpLink = new HttpLink({
-  uri: process.env.API_CONNECTION
+  uri: process.env.REACT_APP_API
 })
 
 
