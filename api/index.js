@@ -17,7 +17,7 @@ const {Users} = require('./models');
 
 const {ApolloServer} = require('apollo-server-express')
 
-let port = process.env.PORT || 4041;    //general purpose catch statement. Will add more specific error handling at a later date
+let port = process.env.PORT || 4041
 
 app.use(helmet());
 app.use(cors());
@@ -30,7 +30,7 @@ const server = new ApolloServer(
     resolvers,
 
     context: async ({req}) => ({
-        //get token
+        //get jwt from authorization header
         token: req.headers.authorization
     })
 
@@ -40,7 +40,7 @@ const server = new ApolloServer(
 //mount ApolloServer on express appliation
 server.applyMiddleware({app, path: '/api'});
 
-//start listening on 4042
+//start listening on port of the environment
 app.listen(port, () => {
   console.log(`listening on ${port}`)
 });

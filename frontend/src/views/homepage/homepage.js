@@ -31,8 +31,8 @@ function Cases() {
   if (loading) return (<p> Loading ... </p>);
 
   return (
-    <div>
-      <ul>
+    <div className = {styles.container}>
+      <ul className = {styles.cases}>
         {data.getAllCases.map( (x) => {
           return (
             <li key = {x.id} className = {styles.li}>
