@@ -6,5 +6,8 @@ people run into new mysteries every day. That's why I created Sleuthin': a myste
 there were fictional websites in-game where mysteries were posted for the main characters to solve. The stack used to create the app was express js, apollo server, 
 mongoDB (through mongoose), react, and react router.
 
+Link to the deployed app: sleuthin.vercel.app
+
 TODO:
-  Change JWT based authorization to session tokens.
+ 
+Change JWT based authorization to session tokens.
