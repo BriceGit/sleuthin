@@ -1,4 +1,4 @@
-# sleuthin
+# Sleuthin'
 Sleuthin' : a mystery solving social network
 
 Have you ever wondered what little mysteries people run into on a daily basis? From something as simple as missing keys, to something as huge as a stolen car, 
